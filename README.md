@@ -1,2 +1,40 @@
 thought-processor
 =================
+
+There are 3 directories
+
+1. data: contains all the data (emails, train data, test data)
+2. scripts: contains scripts to preprocess data, script for making the webApi
+3. libshorttext-1.0: library for building the SVM model (a machine learning algorihtm for classification)
+
+
+Before executing, you might have to re-build the library. (I build it for linux 32 bit)
+Move to libshorttext-1.0/ directory and execute:
+make clean
+make
+
+
+How to execute
+
+1. create the training an test data
+Move to scripts directory and execute:
+"python classifpy"
+
+
+2. train the model
+Move to libshorttext-1.0/ directory and execute:
+"python text-train.py ../data/training_data"
+1st argument is the path of training data
+
+3. test the model
+Move to libshorttext-1.0/ directory and execute:
+"python text-predict.py ../data/testing_data training_data.model/ results"
+1st argument is path of test data, 2nd argument is path to the model, 3rd argument is path to a file for storing results
+
+
+For more training and testing options, check the README in libshorttext-1.0/
+
+For real time prediction
+Move to scripts and execute:
+"python predict.py <PATH_TO_MODEL>"
+Example: "python predict.py ../libshorttext-1.0/training_data.model/"
