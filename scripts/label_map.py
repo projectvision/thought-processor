@@ -1,0 +1,25 @@
+label_dict = {
+            "1.0":"Beginning a new phase/endeavor/path",
+            "2.0":"Gathering resources for imminent activity",
+            "3.0":"Stalled activity due to lack of information",
+            "4.0":"Providing resources to sustain or maintain current effort",
+            "5.0":"Organizing, regulating,  or providing  direction to an effort",
+            "6.0":"Consulting or receiving expert advice",
+            "7.0":"Difficult value decision that must be made",
+            "8.0":"Self-assertion in a competitive environment",
+            "9.0":"Dealing with failure or frustration",
+            "10.0":"Seeking the hidden attributes in a situation",
+            "11.0":"Managing an unexpected situation",
+            "12.0":"A key decision needs to be made",
+            "13.0":"Trying to move the immovable",
+            "14.0":"Ending or transition into a new phase",
+            "15.0":"A need for moderation or balance before proceeding",
+            "16.0":"Caught in an unhealthy, unproductive pattern",
+            "17.0":"This is a full blown crisis situation",
+            "18.0":"A change of perspective is needed for  better understanding",
+            "19.0":"Events are moving in a favorable direction",
+            "20.0":"There is an opportunity to learn from past mistakes",
+            "21.0":"Opportunity for advancement through collaboration",
+            "22.0":"Realizing a personal vision"
+            }
+
