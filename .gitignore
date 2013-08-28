@@ -1,0 +1,15 @@
+#compiled source
+*.pyc
+
+
+#eclipse related
+.pydevproject
+.project
+
+
+#data_file
+data/additional_data
+
+
+#models
+*.model/
