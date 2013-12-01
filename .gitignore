@@ -9,7 +9,7 @@
 
 #data_file
 data/additional_data
-results/
+
 
 #models
 *.model/
