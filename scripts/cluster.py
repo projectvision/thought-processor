@@ -9,6 +9,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import re
 import xlrd
 import numpy as np
+import cPickle as pickle
 
 reNUM = re.compile("[0-9]")
 

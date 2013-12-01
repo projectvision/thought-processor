@@ -5,8 +5,9 @@ import re
 import urllib
 import urllib2
 import xlrd
+import ner
 
-
+tagger = ner.SocketNER(host='localhost', port=5000)
 reNUM = re.compile("[0-9]")
 
 #reference: http://daringfireball.net/2010/07/improved_regex_for_matching_urls
@@ -60,6 +61,14 @@ def clean_text(text):
             clean_text += char
         else:
             clean_text += " "
+    
+    #replace the named entities
+    tag_dict = tagger.get_entities(clean_text)
+    for label in tag_dict.keys():
+        entities = set(tag_dict[label])
+        for entity in entities:
+            clean_text = clean_text.replace(entity,label)
+    
     return clean_text
     
 
@@ -78,7 +87,8 @@ def get_mlp_data(file='../data/Emails2.xlsx'):
                 label = '5.0'
             
             mlp_data.append((label,body))
-
+            
+            
     print "mlp data loaded"
     return mlp_data
 

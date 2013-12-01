@@ -23,3 +23,28 @@ label_dict = {
             "22.0":"Realizing a personal vision"
             }
 
+sub_label_dict = {
+            "1.0":{0:"Review key information, Share key information",1:"Share key information",2:"Review key information"},
+            "2.0":{0:"provide requested information, fact check key data",1:"confirm an agreement or arrangement, provide requested information",2:"provide requested information, complete required documentation"},
+            "3.0":{0:"provide requested information, complete required documentation",1:"provide requested information", 2:"complete required documentation, complete required activity, voice necessary concerns"},
+            "5.0":{0:"Set up or attend meeting, Complete required documentation, Review key information",1:"Respond to confirm details, Provide requested information, Review key information, Share key information",2:"Complete required documentation, Review key information"},
+            "6.0":{0:"set up or attend meeting, make requested revisions, provide requested resources",1:"Follow-up conversation required, provide feedback, provide required resource, provide required information",2:"Develop alternative strategy, Brainstorming session, setup or attend meeting, provide feedback"},
+            "7.0":{0:"provide requested resources",1:"provide requested resources",2:"provide requested resources"},
+            "8.0":{0:"",1:"",2:""},
+            "9.0":{0:"",1:"Respond directly to complaint, provide requested information, set up or attend meeting",2:"set up or attend meeting, complete required documentation, provide requested information"},
+            "10.0":{0:"",1:"",2:""},
+            "11.0":{0:"Follow-up conversation required, execute requested activity, provide expert advice",1:"provide expert advice, provide feedback, perform research to find required information",2:"provide expert advice, provide feedback, perform research to find required information"},
+            "12.0":{0:"",1:"provide expert advice",2:""},
+            "13.0":{0:"",1:"",2:""},
+            "14.0":{0:"",1:"",2:""},
+            "15.0":{0:"",1:"",2:""},
+            "16.0":{0:"",1:"",2:""},
+            "17.0":{0:"",1:"",2:"provide requested resources"},
+            "18.0":{0:"",1:"",2:""},
+            "19.0":{0:"provide requested resources, provide requested feedback, follow-up conversation required",1:"provide requested information",2:"provide requested information"},
+            "20.0":{0:"provide feedback",1:"",2:""},
+            "21.0":{0:"Follow-up conversation required, provide requested information, provide feedback",1:"In-person conversation required, provide feedback, follow-up conversation required",2:"set up or attend meeting, provide requested information"},
+            "22.0":{0:"",1:"Follow-up conversation required, provide feedback",2:"provide feedback"}
+            } 
+            
+

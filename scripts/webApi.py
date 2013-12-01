@@ -11,6 +11,10 @@ import time
 #env="local"
 env="server"
 
+
+email_log_file = None
+feedback_log_file = None
+
 m=None
 def load_model(model_file):
     global m
@@ -41,7 +45,7 @@ def write_to_db(email_from,email_subject,email_body,label_id,sub_label_id):
     return id
     
 
-def write_to_csv(data,csv_file="../data/emails_table.csv"):
+def write_to_csv(data,csv_file):
     with open(csv_file,'a') as f:
         csv_obj = csv.writer(f)
         csv_obj.writerow(data)
@@ -70,17 +74,35 @@ def classify():
     new_text = clean_text(email_body)
     label_id = predict_single_text(str(new_text),m)
     label_name = label_dict[label_id]
-    suggestions = ["others"]+sub_label_dict[label_id].values()
     sub_label_id = 0
+    suggestions = sub_label_dict[label_id][sub_label_id].split(',')
+    if len(suggestions) == 0:
+        suggestions = ['No Action Needed']
     #id=write_to_db(email_from,email_subject,email_body,int(float(label_id)),sub_label_id)
     id = time.time()
     data = [id,email_from,email_subject,email_body,label_id,sub_label_id]
-    write_to_csv(data)
-    result = dict(email_id=id,label_id=label_id,label_name=label_name,suggestions=suggestions)
+    write_to_csv(data,email_log_file)
+    result = dict(email_id=id,label_id=label_id,label_name=label_name,suggestions=suggestions,sub_label_id=sub_label_id)
     return result
 
+
+@post('/api/feedback/49917331096')
+def get_feedback():
+    try:
+        post_var = request.POST.dict
+        email_id = post_var['email_id'][0] 
+        feedback = post_var['feedback'][0]
+        data = [email_id,feedback] 
+        write_to_csv(data,feedback_log_file)
+        return {'status':1}
+    except:
+        return {'status':0}
+    
 @route('/api/71828/<text:re:.*>')
 def get_data(text):
+    '''
+    TODO: obsolete api. to be removed
+    '''
     try:
         jsonObj = json.loads(text)
         label=jsonObj["label"]
@@ -94,6 +116,9 @@ def get_data(text):
 
 @post('/api/71828')
 def get_data():
+    '''
+    TODO: obsolete api. to be removed
+    '''
     try:
         post_var = request.POST.dict
         label = post_var['label'][0]
@@ -115,10 +140,14 @@ def write_data(label,text):
 
 #main begins
 if env == "local":
+    email_log_file =  "../data/emails_table.csv"
+    feedback_log_file = "../data/feedback_table.csv"
     load_model("../libshorttext-1.0/training_data.model")
     #connect_to_db("localhost","root","sql")
     run(host="localhost", port=8080, debug=True)
 elif env == "server":
+    email_log_file =  "/home/projectvision/classifier/data/emails_table.csv"
+    feedback_log_file = "/home/projectvision/classifier/data/feedback_table.csv"
     load_model("/home/projectvision/classifier/model")
     #connect_to_db("mysql.server","projectvision","sql")
     application = default_app()
