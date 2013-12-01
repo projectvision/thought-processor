@@ -8,6 +8,7 @@
 from .client import (
     SocketNER,
     HttpNER,
+    ApiNER
 )
 
 from .exceptions import (
@@ -21,5 +22,6 @@ VERSION = tuple(map(int, __version__.split('.')))
 __all__ = [
     'SocketNER',
     'HttpNER',
+    'ApiNER',
     'NERError',
 ]

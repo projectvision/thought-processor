@@ -7,9 +7,12 @@ import urllib2
 import xlrd
 import ner
 
-tagger = ner.SocketNER(host='localhost', port=5000)
-reNUM = re.compile("[0-9]")
+INC_NER = True
+if INC_NER:
+    #tagger = ner.SocketNER("localhost",5000)
+    tagger = ner.ApiNER("http://mighty-brushlands-7228.herokuapp.com/")
 
+reNUM = re.compile("[0-9]")
 #reference: http://daringfireball.net/2010/07/improved_regex_for_matching_urls
 reURL = re.compile(ur'(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?\xab\xbb\u201c\u201d\u2018\u2019]))')
 
@@ -63,11 +66,13 @@ def clean_text(text):
             clean_text += " "
     
     #replace the named entities
-    tag_dict = tagger.get_entities(clean_text)
-    for label in tag_dict.keys():
-        entities = set(tag_dict[label])
-        for entity in entities:
-            clean_text = clean_text.replace(entity,label)
+    if INC_NER:
+        tag_dict = tagger.get_entities(clean_text)
+        #print tag_dict
+        for label in tag_dict.keys():
+            entities = set(tag_dict[label])
+            for entity in entities:
+                clean_text = clean_text.replace(entity,label)
     
     return clean_text
     

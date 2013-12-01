@@ -3,6 +3,7 @@
 try:
     import http.client as httplib
     from urllib.parse import urlencode
+    
 except ImportError:
     import httplib
     from urllib import urlencode
@@ -10,7 +11,7 @@ except ImportError:
 import json
 import re
 import socket
-
+import requests
 from itertools import groupby
 from operator import itemgetter
 
@@ -170,5 +171,32 @@ class HttpNER(NER):
                 print("Failed to post HTTP request.")
                 raise e
         return tagged_text
+
+
+class ApiNER(NER):
+    """Stanford NER using Heroku Api.
+        
+    """
+
+    def __init__(self, url='localhost',output_format='inlineXML'):
+        self.url = url
+        self.oformat = output_format
+        
+
+    def tag_text(self, text):
+        """Tag the text with proper named entities token-by-token.
+
+        :param text: raw text strig to tag
+        :returns: tagged text in given output format
+        """
+        for s in ('\f', '\n', '\r', '\t', '\v'): #strip whitespaces
+            text = text.replace(s, '')
+        text += '\n' #ensure end-of-line
+        
+        resp = requests.post(self.url, {'text':text})
+        tagged_text = resp.text
+        return tagged_text
+
+
 
 
